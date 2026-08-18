@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Read(//c/Users/tikem/Documents/vs/Central_Apps/**)",
+      "Bash(grep -n \"navy\\\\|accent\\\\|header\\\\|:root\\\\|font-family\" \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Recebimento_Fornecedor\\\\index.html\" | head -50)",
+      "Read(//c/Users/tikem/Documents/vs/Recebimento_Fornecedor/**)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Canal_de_Etica\\\\imagens\")",
+      "Bash(cp \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Central_Apps\\\\imagens\\\\Distribuidora_KEM.png\" \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Canal_de_Etica\\\\imagens\\\\\" && cp \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Central_Apps\\\\imagens\\\\icone.png\" \"c:\\\\Users\\\\tikem\\\\Documents\\\\vs\\\\Canal_de_Etica\\\\imagens\\\\\")",
+      "Bash(mkdir -p imagens)",
+      "Bash(cp \"../Central_Apps/imagens/Distribuidora_KEM.png\" imagens/)",
+      "Bash(cp \"../Central_Apps/imagens/icone.png\" imagens/)",
+      "Bash(rtk git *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk find *)",
+      "Bash(command rtk find . -maxdepth 1 -name '*cp c*' -print -delete)",
+      "Bash(/usr/bin/find . -maxdepth 1 -name '*cp c*' -print -delete)"
+    ]
+  }
+}
