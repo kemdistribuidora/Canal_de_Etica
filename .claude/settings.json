@@ -14,7 +14,8 @@
       "Bash(rtk grep *)",
       "Bash(rtk find *)",
       "Bash(command rtk find . -maxdepth 1 -name '*cp c*' -print -delete)",
-      "Bash(/usr/bin/find . -maxdepth 1 -name '*cp c*' -print -delete)"
+      "Bash(/usr/bin/find . -maxdepth 1 -name '*cp c*' -print -delete)",
+      "Read(//c/Users/tikem/Documents/vs/Agendamento/agendamento/**)"
     ]
   }
 }

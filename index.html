@@ -1,642 +1,692 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Canal de Ética</title>
-    <link rel="icon" type="image/png" href="imagens/icone.png" />
-    <link rel="apple-touch-icon" href="imagens/icone.png" />
-    <style>
-      :root {
-        /* Cores da marca KEM */
-        --azul: #123a6b;
-        --azul-escuro: #0e2e56;
-        --azul-clarinho: #eaf1fb;
-        --laranja: #f7941d;
-        --vermelho: #e5341f;
-        --grad: linear-gradient(135deg, #f7a81b, #e5341f);
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canal de Ética</title>
+  <link rel="icon" type="image/png" href="imagens/icone.png">
+  <link rel="apple-touch-icon" href="imagens/icone.png">
 
-        --fundo: #eef1f6;
-        --card: #ffffff;
-        --texto: #1f2733;
-        --texto-suave: #5b6675;
-        --placeholder: #8d99a8;
-        --borda: #c7cfdb;
-        --borda-forte: var(--azul);
-        --ok: #1f8a4c;
-        --ok-escuro: #176c3b;
-        --erro: #c5221f;
-      }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-      * {
-        box-sizing: border-box;
-      }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      html {
-        background: var(--fundo);
-      }
+    :root {
+      --brand: #024a70;
+      --brand-dark: #002a44;
+      --brand-soft: #e8f1f8;
+      --accent: #ee7a1c;
+      --accent-dark: #c5331b;
+      --accent-soft: #fdeede;
+      --wave: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      --success: #16824a;
+      --success-soft: #e8f7ef;
+      --danger: #b42318;
+      --danger-soft: #fff0ee;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #dbe4ee;
+      --canvas: #f6f8fb;
+      --radius: 8px;
+      --shadow: 0 18px 50px rgba(15, 35, 60, .12);
+      --shadow-sm: 0 8px 24px rgba(15, 35, 60, .08);
+    }
 
-      body {
-        margin: 0 auto;
-        max-width: min(900px, 97vw);
-        padding: 16px 16px 40px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        color: var(--texto);
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(2, 74, 112, .1), transparent 30%),
+        linear-gradient(180deg, #eef5fb 0%, var(--canvas) 38%, #fff 100%);
+      display: flex;
+      flex-direction: column;
+    }
 
-      /* ---------- Barra do topo ---------- */
-      .topo {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-        background: #fff;
-        border: 1px solid var(--borda);
-        border-top: 5px solid transparent;
-        border-image: var(--grad) 1;
-        border-radius: 12px;
-        padding: 14px 20px;
-        margin-bottom: 16px;
-        box-shadow: 0 2px 8px rgba(18, 58, 107, 0.08);
-      }
+    header {
+      min-height: 72px;
+      padding: 14px clamp(16px, 4vw, 40px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(219, 228, 238, .8);
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-      .topo .logo {
-        height: 48px;
-        width: auto;
-        display: block;
-      }
+    header::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 3px;
+      background: var(--wave);
+    }
 
-      .topo .titulo h1 {
-        margin: 0;
-        font-size: 22px;
-        font-weight: bold;
-        color: var(--azul);
-      }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
 
-      .topo .titulo .sub {
-        font-size: 13px;
-        color: var(--texto-suave);
-        font-weight: bold;
-      }
+    .brand-logo {
+      height: 46px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
 
-      .panel {
-        background: var(--card);
-        border: 1px solid var(--borda);
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(18, 58, 107, 0.06);
-        padding: 16px 20px;
-        margin-bottom: 16px;
-      }
+    .brand-text { min-width: 0; padding-left: 14px; border-left: 1px solid var(--line); }
 
-      .panel.intro {
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        border-left: 4px solid var(--azul);
-      }
+    header h1 { font-size: 1.05rem; font-weight: 800; letter-spacing: 0; }
+    header p { color: var(--muted); font-size: .82rem; margin-top: 2px; }
 
-      .panel.intro .intro-icon {
-        flex: 0 0 auto;
-        color: var(--azul);
-        margin-top: 2px;
-      }
+    .confidencial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: var(--radius);
+      border: 1px solid #bde9d1;
+      color: var(--success);
+      background: var(--success-soft);
+      font-size: .82rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
 
-      .panel.intro p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.55;
-        color: var(--texto-suave);
-      }
+    main {
+      flex: 1;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(20px, 4vw, 44px) 16px;
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 560px);
+      gap: clamp(20px, 4vw, 42px);
+      align-items: start;
+    }
 
-      .panel.intro p + p {
-        margin-top: 10px;
-      }
+    .intro { padding: 18px 0 0; }
 
-      .panel.intro strong {
-        font-weight: 700;
-        color: var(--texto);
-      }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border: 1px solid #f7d4ba;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
 
-      /* ---------- Cartão do formulário ---------- */
-      .form-card {
-        background: var(--card);
-        border: 1px solid var(--borda);
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(18, 58, 107, 0.06);
-        overflow: hidden;
-      }
+    .intro h2 {
+      margin-top: 18px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--ink);
+      max-width: 560px;
+    }
 
-      form {
-        display: flex;
-        flex-direction: column;
-      }
+    .intro p {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
 
-      .section {
-        padding: 22px 26px;
-        border-bottom: 1px solid var(--borda);
-      }
+    .support-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 520px;
+    }
 
-      .section:last-of-type {
-        border-bottom: none;
-      }
+    .support-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.5;
+    }
 
-      .section-title {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-        margin: 0 0 18px;
-      }
+    .support-item .mini-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius);
+      color: var(--brand);
+      background: #fff;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-      .section-title .num {
-        font-size: 12px;
-        font-weight: 700;
-        color: #fff;
-        background: var(--azul);
-        border-radius: 4px;
-        padding: 2px 7px;
-        letter-spacing: 0.02em;
-      }
+    .topic-list {
+      margin-top: 26px;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--line);
+      max-width: 520px;
+    }
 
-      .section-title h2 {
-        margin: 0;
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--azul);
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-      }
+    .topic-list .topic-title {
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
 
-      .row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-      }
+    .topic-list .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 
-      .row + .row,
-      .field + .row,
-      .row + .field,
-      .field + .field {
-        margin-top: 18px;
-      }
+    .topic-list .chip {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: var(--brand-soft);
+      border-radius: 999px;
+      padding: 5px 11px;
+    }
 
-      .field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
+    .card {
+      width: 100%;
+      background: rgba(255, 255, 255, .94);
+      border: 1px solid rgba(219, 228, 238, .95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 30px);
+    }
 
-      .field label,
-      .field .label {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--texto);
-      }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
 
-      .required {
-        color: var(--erro);
-        margin-left: 4px;
-      }
+    .section-title i { color: var(--brand); }
 
-      .subtitle {
-        margin: -2px 0 2px;
-        font-size: 12px;
-        color: var(--texto-suave);
-      }
+    .form-group { margin-bottom: 17px; }
 
-      /* ---------- Seletor segmentado ---------- */
-      .segmented {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 2px;
-      }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #40516a;
+      font-size: .79rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
 
-      .segmented input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
+    .field-hint {
+      display: block;
+      margin: -4px 0 8px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+    }
 
-      .segmented .seg-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 9px 16px;
-        border: 1px solid var(--borda);
-        border-radius: 7px;
-        background: #fff;
-        color: var(--texto-suave);
-        font-size: 13.5px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
-      }
+    input, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: #fbfdff;
+      font: inherit;
+      font-size: .93rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
 
-      .segmented .seg-item:hover {
-        border-color: var(--azul);
-        color: var(--azul);
-      }
+    input { min-height: 44px; }
 
-      .segmented input:checked + .seg-item {
-        border-color: var(--azul);
-        background: var(--azul);
-        color: #fff;
-      }
+    textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
 
-      .segmented input:focus-visible + .seg-item {
-        outline: 2px solid var(--azul);
-        outline-offset: 2px;
-      }
+    input:focus, textarea:focus {
+      border-color: var(--brand);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(2, 74, 112, .12);
+    }
 
-      input[type='text'],
-      input[type='date'],
-      textarea {
-        width: 100%;
-        border: 1px solid var(--borda);
-        background: #fff;
-        border-radius: 7px;
-        padding: 10px 12px;
-        font-family: inherit;
-        font-size: 14.5px;
-        color: var(--texto);
-        transition: border-color 0.15s ease, box-shadow 0.15s ease;
-      }
+    input::placeholder, textarea::placeholder { color: #94a3b8; }
 
-      input::placeholder,
-      textarea::placeholder {
-        color: var(--placeholder);
-      }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-      input:focus,
-      textarea:focus {
-        outline: none;
-        border-color: var(--azul);
-        box-shadow: 0 0 0 3px rgba(18, 58, 107, 0.1);
-      }
+    .choice-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
-      textarea {
-        min-height: 110px;
-        resize: vertical;
-      }
+    .choice-item {
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 9px 10px;
+      color: var(--muted);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 6px;
+      font-size: .82rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, color .15s;
+    }
 
-      .calendar-wrap {
-        position: relative;
-      }
+    .choice-item:hover { border-color: #8fb6d4; }
 
-      .calendar-wrap .icon {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--texto-suave);
-        font-size: 15px;
-        pointer-events: none;
-      }
+    .choice-item.ativo {
+      border-color: #8fb6d4;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+    }
 
-      /* ---------- Anexo ---------- */
-      .file-inline {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
+    .upload-area {
+      position: relative;
+      min-height: 108px;
+      border: 1.5px dashed #b8c7d8;
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      background: #fbfdff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
 
-      .upload-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid var(--borda);
-        background: #fff;
-        color: var(--azul);
-        border-radius: 7px;
-        padding: 9px 14px;
-        font-size: 13.5px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: border-color 0.12s ease;
-      }
+    .upload-area:hover { border-color: var(--brand); background: var(--brand-soft); transform: translateY(-1px); }
+    .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-area .upload-icon { color: var(--brand); margin-bottom: 8px; }
+    .upload-area .label-main { color: var(--ink); font-size: .9rem; font-weight: 800; word-break: break-word; }
+    .upload-area .label-sub { color: var(--muted); font-size: .78rem; margin-top: 3px; }
+    .upload-area.tem-arquivo { border-color: #7cd2a0; background: var(--success-soft); }
+    .upload-area.tem-arquivo .upload-icon, .upload-area.tem-arquivo .label-main { color: var(--success); }
 
-      .upload-btn:hover {
-        border-color: var(--azul);
-      }
+    .btn {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: var(--radius);
+      padding: 0 16px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 5px;
+      transition: transform .12s, box-shadow .2s, background .2s, opacity .2s;
+    }
 
-      .upload-btn input {
-        display: none;
-      }
+    .btn:active:not(:disabled) { transform: scale(.99); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, var(--brand), var(--brand-dark)); box-shadow: 0 12px 28px rgba(2, 74, 112, .2); }
+    .btn-primary:hover:not(:disabled) { box-shadow: 0 16px 34px rgba(2, 74, 112, .28); }
+    .btn-outline { color: var(--brand-dark); background: #fff; border: 1px solid #b3cee2; }
 
-      .upload-status {
-        font-size: 12.5px;
-        color: var(--texto-suave);
-      }
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
 
-      /* ---------- Rodapé de ação ---------- */
-      .action-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 18px 26px;
-        background: var(--fundo);
-      }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-      .action-bar .note {
-        font-size: 12px;
-        color: var(--texto-suave);
-      }
+    .alert {
+      margin-bottom: 18px;
+      padding: 13px 14px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
 
-      .primary-btn {
-        border: none;
-        background: var(--azul);
-        color: #fff;
-        border-radius: 7px;
-        padding: 12px 26px;
-        font-family: inherit;
-        font-weight: 700;
-        font-size: 14.5px;
-        cursor: pointer;
-        box-shadow: 0 2px 0 var(--azul-escuro);
-        transition: background 0.15s ease, transform 0.05s ease;
-        white-space: nowrap;
-      }
+    .alert-error { background: var(--danger-soft); color: var(--danger); border-color: #ffd1cc; }
 
-      .primary-btn:hover {
-        background: var(--azul-escuro);
-      }
+    .required { color: var(--danger); }
 
-      .primary-btn:active {
-        transform: translateY(1px);
-        box-shadow: none;
-      }
+    .note-anon {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 7px;
+    }
 
-      .status-text {
-        min-height: 18px;
-        font-size: 13px;
-        font-weight: 700;
-      }
+    .success-screen { text-align: center; padding: 8px 0 0; }
+    .success-icon {
+      width: 66px; height: 66px; border-radius: 999px; margin: 0 auto 16px;
+      color: #fff; background: var(--success);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-screen h3 { color: var(--ink); font-size: 1.35rem; margin-bottom: 8px; }
+    .success-screen p { color: var(--muted); font-size: .93rem; line-height: 1.55; margin-bottom: 12px; }
 
-      .status-text.error {
-        color: var(--erro);
-      }
+    .notice {
+      margin: 14px 0 18px;
+      padding: 12px 13px;
+      border-radius: var(--radius);
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      text-align: left;
+      border: 1px solid #cfe1ef;
+      font-size: .86rem;
+      line-height: 1.5;
+    }
 
-      .status-text.success {
-        color: var(--ok-escuro);
-      }
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 18px;
+      font-size: .78rem;
+    }
 
-      footer {
-        text-align: center;
-        font-size: 12px;
-        color: var(--texto-suave);
-        padding: 16px 0 0;
-      }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .intro { padding-top: 4px; }
+    }
 
-      @media (max-width: 640px) {
-        body {
-          padding: 12px 10px 30px;
-        }
+    @media (max-width: 560px) {
+      header p { display: none; }
+      .confidencial-badge span { display: none; }
+      .confidencial-badge { width: 40px; padding: 0; justify-content: center; }
+      .grid-2, .choice-group { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
 
-        .topo {
-          padding: 12px 14px;
-        }
+<header>
+  <div class="brand">
+    <img class="brand-logo" src="imagens/Distribuidora_KEM.png" alt="KEM - Distribuidora de Alimentos">
+    <div class="brand-text">
+      <h1>Canal de Ética</h1>
+      <p>Relato seguro e confidencial</p>
+    </div>
+  </div>
+  <div class="confidencial-badge"><i data-lucide="shield-check" width="16" height="16"></i> <span>100% confidencial</span></div>
+</header>
 
-        .topo .titulo h1 {
-          font-size: 18px;
-        }
+<main>
+  <section class="intro" aria-label="Sobre o Canal de Ética">
+    <div class="eyebrow"><i data-lucide="megaphone" width="15" height="15"></i> Colaboradores, terceiros e fornecedores</div>
+    <h2>Seu relato, com segurança.</h2>
+    <p>
+      Este canal foi criado para que todos possam relatar situações em desacordo com os valores,
+      normas internas, Código de Conduta ou legislação vigente da empresa.
+    </p>
 
-        .topo .logo {
-          height: 38px;
-        }
-
-        .panel {
-          padding: 14px 16px;
-        }
-
-        .section {
-          padding: 18px 16px;
-        }
-
-        .row {
-          grid-template-columns: 1fr;
-        }
-
-        .action-bar {
-          flex-direction: column;
-          align-items: stretch;
-          padding: 16px;
-        }
-
-        .action-bar .primary-btn {
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="topo">
-      <img class="logo" src="imagens/Distribuidora_KEM.png" alt="Kem Distribuidora de Alimentos" />
-      <div class="titulo">
-        <h1>Canal de Ética</h1>
-        <div class="sub">Relato seguro e confidencial</div>
+    <div class="support-list">
+      <div class="support-item">
+        <span class="mini-icon"><i data-lucide="user-round-x" width="18" height="18"></i></span>
+        <span>Você não é obrigado(a) a se identificar. O relato pode ser anônimo.</span>
       </div>
-    </header>
+      <div class="support-item">
+        <span class="mini-icon"><i data-lucide="lock" width="18" height="18"></i></span>
+        <span>Sigilo total. Apenas o comitê de ética tem acesso ao conteúdo.</span>
+      </div>
+      <div class="support-item">
+        <span class="mini-icon"><i data-lucide="shield-off" width="18" height="18"></i></span>
+        <span>Nenhuma forma de retaliação será tolerada contra quem relatar de boa-fé.</span>
+      </div>
+    </div>
 
-    <main>
-      <section class="panel intro">
-        <svg class="intro-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2 3 6v6c0 5.2 3.6 9.7 9 11 5.4-1.3 9-5.8 9-11V6l-9-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-          <path d="M12 8v5M12 16.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-        </svg>
-        <div>
-          <p>
-            Canal criado para <strong>Colaboradores, Terceiros, Parceiros e Fornecedores</strong>
-            relatarem, de forma segura e confidencial, situações em desacordo com os valores,
-            normas internas, Código de Conduta ou legislação vigente da empresa.
-          </p>
-          <p>
-            Podem ser comunicadas: <strong>assédio moral ou sexual</strong>, discriminação,
-            condutas abusivas, fraudes, conflitos de interesse, corrupção, descumprimento de
-            normas internas e riscos à segurança e saúde no trabalho.
-          </p>
+    <div class="topic-list">
+      <div class="topic-title">O que pode ser relatado</div>
+      <div class="chips">
+        <span class="chip">Assédio moral ou sexual</span>
+        <span class="chip">Discriminação</span>
+        <span class="chip">Condutas abusivas</span>
+        <span class="chip">Fraude</span>
+        <span class="chip">Conflito de interesse</span>
+        <span class="chip">Corrupção</span>
+        <span class="chip">Segurança e saúde no trabalho</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" x-data="canalEtica()" x-init="init()">
+    <div x-show="!concluido" x-transition>
+      <div class="section-title"><i data-lucide="file-text" width="21" height="21"></i> Registrar relato</div>
+
+      <div class="alert alert-error" x-show="erro" x-transition>
+        <i data-lucide="circle-alert" width="18" height="18"></i>
+        <span x-text="erro"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Qual sua relação com a empresa? <span class="required">*</span></label>
+        <div class="choice-group" role="radiogroup" aria-label="Relação com a empresa">
+          <div class="choice-item" :class="{ ativo: form.relacao === 'Colaborador' }" @click="form.relacao = 'Colaborador'">Colaborador</div>
+          <div class="choice-item" :class="{ ativo: form.relacao === 'Fornecedor / Prestador de Serviços' }" @click="form.relacao = 'Fornecedor / Prestador de Serviços'">Fornecedor / Prestador</div>
+          <div class="choice-item" :class="{ ativo: form.relacao === 'Terceiros' }" @click="form.relacao = 'Terceiros'">Terceiros</div>
         </div>
-      </section>
-
-      <div class="form-card">
-        <form id="canalForm">
-          <div class="section">
-            <div class="section-title">
-              <span class="num">01</span>
-              <h2>Identificação</h2>
-            </div>
-
-            <div class="field">
-              <div class="label">Qual sua relação com a empresa?<span class="required">*</span></div>
-              <div class="segmented" role="radiogroup" aria-label="Relação com a empresa">
-                <input type="radio" id="rel-colab" name="relacao" value="Colaborador" required />
-                <label class="seg-item" for="rel-colab">Colaborador</label>
-
-                <input type="radio" id="rel-forn" name="relacao" value="Fornecedor / Prestador de Serviços" />
-                <label class="seg-item" for="rel-forn">Fornecedor / Prestador de Serviços</label>
-
-                <input type="radio" id="rel-terc" name="relacao" value="Terceiros" />
-                <label class="seg-item" for="rel-terc">Terceiros</label>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="nome">Nome</label>
-              <p class="subtitle">Opcional. O relato pode ser feito de forma anônima.</p>
-              <input id="nome" name="nome" type="text" placeholder="Nome completo (opcional)" maxlength="200" />
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="section-title">
-              <span class="num">02</span>
-              <h2>Detalhes da ocorrência</h2>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="dataOcorrido">Data do ocorrido<span class="required">*</span></label>
-                <div class="calendar-wrap">
-                  <input id="dataOcorrido" name="dataOcorrido" type="date" required />
-                  <span class="icon" aria-hidden="true">📅</span>
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="ondeOcorrido">Local do ocorrido<span class="required">*</span></label>
-                <input id="ondeOcorrido" name="ondeOcorrido" type="text" placeholder="Setor, unidade ou endereço" maxlength="200" required />
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="presenciou">Testemunhas<span class="required">*</span></label>
-              <input id="presenciou" name="presenciou" type="text" placeholder="Nomes de quem presenciou, se houver" maxlength="200" required />
-            </div>
-
-            <div class="field">
-              <label for="descricao">Descrição do ocorrido<span class="required">*</span></label>
-              <textarea id="descricao" name="descricao" placeholder="Descreva com o máximo de detalhes possível: o que aconteceu, quando e quem esteve envolvido." maxlength="5000" required></textarea>
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="section-title">
-              <span class="num">03</span>
-              <h2>Anexo</h2>
-            </div>
-
-            <div class="field">
-              <div class="label">Foto ou documento de apoio (opcional)</div>
-              <div class="file-inline">
-                <label class="upload-btn" for="arquivo">
-                  <input id="arquivo" type="file" name="arquivo" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" />
-                  <span>📎 Selecionar arquivo</span>
-                </label>
-                <span id="nomeArquivo" class="upload-status">Nenhum arquivo selecionado.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="action-bar">
-            <span class="note">Campos com <span class="required">*</span> são obrigatórios.</span>
-            <button type="submit" class="primary-btn">Enviar relato</button>
-          </div>
-
-          <div id="status" class="status-text" aria-live="polite" style="padding: 0 26px 18px;"></div>
-        </form>
       </div>
 
-      <footer>Kem Distribuidora de Alimentos</footer>
-    </main>
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" x-model="form.nome" placeholder="Nome completo (opcional)" maxlength="200">
+        <p class="note-anon"><i data-lucide="info" width="14" height="14"></i> Deixe em branco para relatar de forma anônima.</p>
+      </div>
 
-    <script>
-      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw6Zv_RvsVW_TPpem6iQ85gV-aS_IrN3F1E8mUvH9nCP57xhybGlvlmyKUup0tB1Bk/exec';
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Data do ocorrido <span class="required">*</span></label>
+          <input type="date" x-model="form.dataOcorrido">
+        </div>
+        <div class="form-group">
+          <label>Local do ocorrido <span class="required">*</span></label>
+          <input type="text" x-model="form.ondeOcorrido" placeholder="Setor, unidade..." maxlength="200">
+        </div>
+      </div>
 
-      const form = document.getElementById('canalForm');
-      const fileInput = document.getElementById('arquivo');
-      const nomeArquivo = document.getElementById('nomeArquivo');
-      const statusBox = document.getElementById('status');
+      <div class="form-group">
+        <label>Alguém presenciou? <span class="required">*</span></label>
+        <input type="text" x-model="form.presenciou" placeholder="Nomes das testemunhas, se houver" maxlength="200">
+      </div>
 
-      fileInput.addEventListener('change', () => {
-        const file = fileInput.files && fileInput.files[0];
-        nomeArquivo.textContent = file ? file.name : 'Nenhum arquivo selecionado.';
-      });
+      <div class="form-group">
+        <label>Descreva o ocorrido <span class="required">*</span></label>
+        <textarea x-model="form.descricao" placeholder="Descreva com o máximo de detalhes: o que aconteceu, quando e quem esteve envolvido." maxlength="5000"></textarea>
+      </div>
 
-      function setStatus(message, type) {
-        statusBox.textContent = message;
-        statusBox.className = 'status-text ' + (type || '');
+      <div class="form-group">
+        <label>Anexo (opcional)</label>
+        <div class="upload-area" :class="{ 'tem-arquivo': arquivo }">
+          <input type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" @change="selecionarArquivo($event)">
+          <div>
+            <div class="upload-icon" x-html="arquivo ? '<i data-lucide=&quot;file-check-2&quot; width=&quot;26&quot; height=&quot;26&quot;></i>' : '<i data-lucide=&quot;paperclip&quot; width=&quot;26&quot; height=&quot;26&quot;></i>'"></div>
+            <div class="label-main" x-text="arquivo ? arquivo.name : 'Clique para anexar foto ou documento'"></div>
+            <div class="label-sub" x-text="arquivo ? formatarTamanho(arquivo.size) : 'Imagem, PDF, Word, Excel ou PowerPoint'"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" @click="enviar()" :disabled="enviando">
+        <span class="spinner" x-show="enviando"></span>
+        <span x-show="!enviando"><i data-lucide="send" width="18" height="18"></i></span>
+        <span x-text="enviando ? 'Enviando...' : 'Enviar relato'"></span>
+      </button>
+    </div>
+
+    <div x-show="concluido" x-transition class="success-screen">
+      <div class="success-icon"><i data-lucide="check-check" width="30" height="30"></i></div>
+      <h3>Relato enviado</h3>
+      <p>Seu relato foi recebido com sigilo e será analisado pelo comitê de ética.</p>
+
+      <div class="notice">
+        <strong>Obrigado por contribuir</strong> com um ambiente de trabalho mais íntegro e seguro para todos.
+      </div>
+
+      <button class="btn btn-outline" @click="reiniciar()"><i data-lucide="plus" width="18" height="18"></i> Novo relato</button>
+    </div>
+  </section>
+</main>
+
+<footer>Kem Distribuidora de Alimentos | Canal de Ética</footer>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw6Zv_RvsVW_TPpem6iQ85gV-aS_IrN3F1E8mUvH9nCP57xhybGlvlmyKUup0tB1Bk/exec';
+
+function renderIcons() {
+  if (window.lucide) setTimeout(() => lucide.createIcons(), 0);
+}
+
+document.addEventListener('alpine:init', () => {
+  Alpine.effect(() => renderIcons());
+});
+
+function canalEtica() {
+  return {
+    enviando: false,
+    concluido: false,
+    erro: '',
+    arquivo: null,
+
+    form: {
+      relacao: '',
+      nome: '',
+      dataOcorrido: '',
+      ondeOcorrido: '',
+      presenciou: '',
+      descricao: ''
+    },
+
+    init() {
+      renderIcons();
+    },
+
+    mostrarErro(msg) {
+      this.erro = msg;
+      renderIcons();
+      setTimeout(() => { this.erro = ''; }, 5000);
+    },
+
+    selecionarArquivo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        this.mostrarErro('O arquivo deve ter no máximo 10 MB.');
+        event.target.value = '';
+        return;
       }
+      this.arquivo = file;
+      renderIcons();
+    },
 
-      async function readFileAsBase64(file) {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result.split(',')[1] || '');
-          reader.onerror = () => reject(new Error('Falha ao ler arquivo.'));
-          reader.readAsDataURL(file);
+    formatarTamanho(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    },
+
+    readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1] || '');
+        reader.onerror = () => reject(new Error('Falha ao ler arquivo.'));
+        reader.readAsDataURL(file);
+      });
+    },
+
+    async enviar() {
+      const f = this.form;
+      if (!f.relacao) return this.mostrarErro('Selecione sua relação com a empresa.');
+      if (!f.dataOcorrido) return this.mostrarErro('Informe a data do ocorrido.');
+      if (!f.ondeOcorrido.trim()) return this.mostrarErro('Informe onde ocorreu.');
+      if (!f.presenciou.trim()) return this.mostrarErro('Informe se alguém presenciou.');
+      if (!f.descricao.trim()) return this.mostrarErro('Descreva o ocorrido.');
+
+      this.enviando = true;
+      this.erro = '';
+
+      try {
+        let arquivoBase64 = '';
+        let arquivoNome = '';
+        let arquivoTipo = '';
+
+        if (this.arquivo) {
+          arquivoBase64 = await this.readFileAsBase64(this.arquivo);
+          arquivoNome = this.arquivo.name;
+          arquivoTipo = this.arquivo.type || 'application/octet-stream';
+        }
+
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            relacao: f.relacao,
+            nome: f.nome.trim(),
+            dataOcorrido: f.dataOcorrido,
+            ondeOcorrido: f.ondeOcorrido.trim(),
+            presenciou: f.presenciou.trim(),
+            descricao: f.descricao.trim(),
+            arquivoNome,
+            arquivoBase64,
+            arquivoTipo
+          })
         });
+
+        if (!response.ok) throw new Error('Erro ao enviar o formulário.');
+
+        const result = await response.json();
+        if (!result || !result.ok) throw new Error(result && result.message ? result.message : 'Erro ao salvar o relato.');
+
+        this.enviando = false;
+        this.concluido = true;
+        renderIcons();
+      } catch (error) {
+        this.enviando = false;
+        this.mostrarErro('Não foi possível enviar o relato. ' + (error && error.message ? error.message : ''));
       }
+    },
 
-      form.addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        const relacao = form.querySelector('input[name="relacao"]:checked');
-        const payload = {
-          relacao: relacao ? relacao.value : '',
-          nome: document.getElementById('nome').value.trim(),
-          dataOcorrido: document.getElementById('dataOcorrido').value,
-          ondeOcorrido: document.getElementById('ondeOcorrido').value.trim(),
-          presenciou: document.getElementById('presenciou').value.trim(),
-          descricao: document.getElementById('descricao').value.trim()
-        };
-
-        if (!payload.relacao || !payload.descricao || !payload.dataOcorrido || !payload.ondeOcorrido || !payload.presenciou) {
-          setStatus('Preencha todos os campos obrigatórios.', 'error');
-          return;
-        }
-
-        const file = fileInput.files && fileInput.files[0];
-
-        try {
-          setStatus('Enviando relato...', '');
-
-          let arquivoBase64 = '';
-          let arquivoNome = '';
-          let arquivoTipo = '';
-
-          if (file) {
-            arquivoBase64 = await readFileAsBase64(file);
-            arquivoNome = file.name;
-            arquivoTipo = file.type || 'application/octet-stream';
-          }
-
-          const response = await fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              ...payload,
-              arquivoNome,
-              arquivoBase64,
-              arquivoTipo
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error('Erro ao enviar o formulário.');
-          }
-
-          const result = await response.json();
-          setStatus(result.message || 'Relato enviado com sucesso!', 'success');
-          form.reset();
-          nomeArquivo.textContent = 'Nenhum arquivo selecionado.';
-        } catch (error) {
-          setStatus('Não foi possível enviar o relato. ' + (error && error.message ? error.message : ''), 'error');
-        }
-      });
-    </script>
-  </body>
+    reiniciar() {
+      this.form = { relacao: '', nome: '', dataOcorrido: '', ondeOcorrido: '', presenciou: '', descricao: '' };
+      this.arquivo = null;
+      this.concluido = false;
+      renderIcons();
+    }
+  };
+}
+</script>
+</body>
 </html>
