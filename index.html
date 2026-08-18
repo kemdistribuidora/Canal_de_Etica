@@ -34,27 +34,43 @@
       .page {
         max-width: 980px;
         margin: 0 auto;
-        padding: 26px 18px 40px;
+        padding: 20px 18px 36px;
+      }
+
+      .page-shell {
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(155, 123, 107, 0.14);
+        border-radius: 18px;
+        padding: 10px;
       }
 
       .panel {
         background: var(--panel);
         border: 1px solid var(--border);
-        border-radius: 14px;
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
-        padding: 22px 20px 18px;
-        margin-bottom: 18px;
+        border-radius: 12px;
+        box-shadow: 0 1px 0 rgba(26, 26, 26, 0.03);
+        padding: 18px 20px 16px;
+        margin-bottom: 14px;
       }
 
       .panel.intro {
+        border: 1px solid rgba(19, 119, 179, 0.5);
         border-left: 5px solid var(--border-strong);
         background: #f3ece7;
+        box-shadow: inset 0 0 0 1px rgba(59, 116, 146, 0.06);
+      }
+
+      .page-shell {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(155, 123, 107, 0.12);
+        border-radius: 16px;
+        padding: 10px;
       }
 
       h1 {
         margin: 0 0 10px;
-        font-size: clamp(2rem, 2.2vw, 3.1rem);
-        line-height: 1.1;
+        font-size: clamp(2rem, 2.2vw, 2.8rem);
+        line-height: 1.12;
         letter-spacing: -0.04em;
         font-weight: 700;
         color: #1f1f1f;
@@ -74,9 +90,9 @@
       .question {
         background: var(--panel-strong);
         border: 1px solid var(--border);
-        border-radius: 14px;
+        border-radius: 12px;
         padding: 16px 20px 18px;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
 
       .question h2 {
@@ -84,6 +100,11 @@
         font-size: clamp(1.4rem, 1.5vw, 2.2rem);
         line-height: 1.2;
         font-weight: 700;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
       }
 
       .field {
@@ -96,6 +117,7 @@
       .question .label {
         font-size: 15px;
         font-weight: 700;
+        color: #1c1c1c;
       }
 
       .required {
@@ -124,20 +146,22 @@
         cursor: pointer;
         font-size: 15px;
         color: #222;
+        min-height: 28px;
       }
 
       .radio-item input[type='radio'] {
         width: 18px;
         height: 18px;
         accent-color: var(--primary);
+        margin: 0;
       }
 
       input[type='text'],
       input[type='date'],
       textarea {
         width: 100%;
-        border: 1px solid #d0caca;
-        background: rgba(255,255,255,0.15);
+        border: 1px solid #d2c3bb;
+        background: rgba(255,255,255,0.12);
         border-radius: 8px;
         padding: 12px 12px;
         font-size: 15px;
@@ -219,13 +243,19 @@
         font-weight: 700;
         font-size: 15px;
         cursor: pointer;
-        box-shadow: 0 6px 12px rgba(31, 139, 227, 0.2);
+        box-shadow: 0 6px 12px rgba(31, 139, 227, 0.18);
         transition: background 0.2s ease, transform 0.2s ease;
       }
 
       .primary-btn:hover {
         background: var(--primary-dark);
         transform: translateY(-1px);
+      }
+
+      .submit-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
       }
 
       .file-inline {
@@ -296,101 +326,103 @@
   </head>
   <body>
     <main class="page">
-      <section class="panel intro">
-        <h1>Colaboradores, Terceiros, Parceiros e<br />Fornecedores.</h1>
+      <div class="page-shell">
+        <section class="panel intro">
+          <h1>Colaboradores, Terceiros, Parceiros e<br />Fornecedores.</h1>
 
-        <p>
-          Este Canal de Ética foi criado para oferecer a todos um meio seguro e confidencial
-          para relatar situações que estejam em desacordo com os valores, normas internas,
-          Código de Conduta, legislação vigente ou princípios éticos da empresa.
-        </p>
+          <p>
+            Este Canal de Ética foi criado para oferecer a todos um meio seguro e confidencial
+            para relatar situações que estejam em desacordo com os valores, normas internas,
+            Código de Conduta, legislação vigente ou princípios éticos da empresa.
+          </p>
 
-        <p style="margin-top: 14px;">
-          Por meio deste canal, podem ser comunicadas, entre outras situações: <strong>assédio moral</strong>
-          ou sexual, discriminação de qualquer natureza, condutas abusivas ou desrespeitosas,
-          fraudes, conflitos de interesse ou corrupção, descumprimento de normas internas,
-          segurança e saúde no trabalho, outras práticas que possam comprometer o ambiente de
-          trabalho, o clima organizacional ou a integridade da empresa.
-        </p>
-      </section>
+          <p style="margin-top: 14px;">
+            Por meio deste canal, podem ser comunicadas, entre outras situações: <strong>assédio moral</strong>
+            ou sexual, discriminação de qualquer natureza, condutas abusivas ou desrespeitosas,
+            fraudes, conflitos de interesse ou corrupção, descumprimento de normas internas,
+            segurança e saúde no trabalho, outras práticas que possam comprometer o ambiente de
+            trabalho, o clima organizacional ou a integridade da empresa.
+          </p>
+        </section>
 
-      <form id="canalForm">
-        <div class="question">
-          <div class="field">
-            <div class="label">Qual sua relação com a empresa?<span class="required">*</span></div>
-            <div class="radio-group" role="radiogroup" aria-label="Relação com a empresa">
-              <label class="radio-item">
-                <input type="radio" name="relacao" value="Colaborador" required />
-                <span>Colaborador</span>
-              </label>
-              <label class="radio-item">
-                <input type="radio" name="relacao" value="Fornecedor / Prestador de Serviços" />
-                <span>Fornecedor / Prestador de Serviços</span>
-              </label>
-              <label class="radio-item">
-                <input type="radio" name="relacao" value="Terceiros" />
-                <span>Terceiros</span>
-              </label>
+        <form id="canalForm">
+          <div class="question">
+            <div class="field">
+              <div class="label">Qual sua relação com a empresa?<span class="required">*</span></div>
+              <div class="radio-group" role="radiogroup" aria-label="Relação com a empresa">
+                <label class="radio-item">
+                  <input type="radio" name="relacao" value="Colaborador" required />
+                  <span>Colaborador</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="relacao" value="Fornecedor / Prestador de Serviços" />
+                  <span>Fornecedor / Prestador de Serviços</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="relacao" value="Terceiros" />
+                  <span>Terceiros</span>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="question">
-          <div class="field">
-            <label for="nome">Qual é o nome?<span class="required">*</span></label>
-            <p class="subtitle">(Você não é obrigado(a) a se identificar. O relato pode ser feito de forma anônima.)</p>
-            <input id="nome" name="nome" type="text" placeholder="Texto de resposta curta" maxlength="200" />
-          </div>
-        </div>
-
-        <div class="question">
-          <div class="field">
-            <label for="dataOcorrido">Data do ocorrido?<span class="required">*</span></label>
-            <div class="calendar-wrap">
-              <input id="dataOcorrido" name="dataOcorrido" type="date" />
-              <span class="icon" aria-hidden="true">📅</span>
+          <div class="question">
+            <div class="field">
+              <label for="nome">Qual é o nome?<span class="required">*</span></label>
+              <p class="subtitle">(Você não é obrigado(a) a se identificar. O relato pode ser feito de forma anônima.)</p>
+              <input id="nome" name="nome" type="text" placeholder="Texto de resposta curta" maxlength="200" />
             </div>
           </div>
-        </div>
 
-        <div class="question">
-          <div class="field">
-            <label for="ondeOcorrido">Onde ocorreu?<span class="required">*</span></label>
-            <input id="ondeOcorrido" name="ondeOcorrido" type="text" placeholder="Texto de resposta curta" maxlength="200" />
-          </div>
-        </div>
-
-        <div class="question">
-          <div class="field">
-            <label for="presenciou">Alguém presenciou?<span class="required">*</span></label>
-            <input id="presenciou" name="presenciou" type="text" placeholder="Texto de resposta curta" maxlength="200" />
-          </div>
-        </div>
-
-        <div class="question">
-          <div class="field">
-            <label for="descricao">Descreva o ocorrido:<span class="required">*</span></label>
-            <textarea id="descricao" name="descricao" placeholder="Texto de resposta longa" maxlength="5000" required></textarea>
-          </div>
-        </div>
-
-        <div class="question upload-box">
-          <div class="field">
-            <div class="label">Se houver foto ou documento para anexar, inclua aqui.</div>
-            <div class="file-inline">
-              <label class="upload-btn" for="arquivo">
-                <input id="arquivo" type="file" name="arquivo" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" />
-                <span>📎 Adicionar arquivo</span>
-              </label>
-
-              <button type="submit" class="primary-btn">✓ Ver pasta</button>
+          <div class="question">
+            <div class="field">
+              <label for="dataOcorrido">Data do ocorrido?<span class="required">*</span></label>
+              <div class="calendar-wrap">
+                <input id="dataOcorrido" name="dataOcorrido" type="date" />
+                <span class="icon" aria-hidden="true">📅</span>
+              </div>
             </div>
-            <div id="nomeArquivo" class="upload-status">Nenhum arquivo selecionado.</div>
           </div>
-        </div>
 
-        <div id="status" class="status-text" aria-live="polite"></div>
-      </form>
+          <div class="question">
+            <div class="field">
+              <label for="ondeOcorrido">Onde ocorreu?<span class="required">*</span></label>
+              <input id="ondeOcorrido" name="ondeOcorrido" type="text" placeholder="Texto de resposta curta" maxlength="200" />
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="field">
+              <label for="presenciou">Alguém presenciou?<span class="required">*</span></label>
+              <input id="presenciou" name="presenciou" type="text" placeholder="Texto de resposta curta" maxlength="200" />
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="field">
+              <label for="descricao">Descreva o ocorrido:<span class="required">*</span></label>
+              <textarea id="descricao" name="descricao" placeholder="Texto de resposta longa" maxlength="5000" required></textarea>
+            </div>
+          </div>
+
+          <div class="question upload-box">
+            <div class="field">
+              <div class="label">Se houver foto ou documento para anexar, inclua aqui.</div>
+              <div class="file-inline">
+                <label class="upload-btn" for="arquivo">
+                  <input id="arquivo" type="file" name="arquivo" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" />
+                  <span>📎 Adicionar arquivo</span>
+                </label>
+
+                <button type="submit" class="primary-btn">✓ Ver pasta</button>
+              </div>
+              <div id="nomeArquivo" class="upload-status">Nenhum arquivo selecionado.</div>
+            </div>
+          </div>
+
+          <div id="status" class="status-text" aria-live="polite"></div>
+        </form>
+      </div>
     </main>
 
     <script>
