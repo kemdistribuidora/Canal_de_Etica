@@ -15,7 +15,22 @@
       "Bash(rtk find *)",
       "Bash(command rtk find . -maxdepth 1 -name '*cp c*' -print -delete)",
       "Bash(/usr/bin/find . -maxdepth 1 -name '*cp c*' -print -delete)",
-      "Read(//c/Users/tikem/Documents/vs/Agendamento/agendamento/**)"
+      "Read(//c/Users/tikem/Documents/vs/Agendamento/agendamento/**)",
+      "Bash(rtk npx *)",
+      "Bash(node -e \"require\\('child_process'\\).execSync\\('node --check code.gs'\\)\")",
+      "Bash(node --check code.gs)",
+      "Bash(node -e ' *)",
+      "Bash(npx playwright *)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npm init *)",
+      "Bash(node test-canal.js)",
+      "Bash(rtk curl *)",
+      "Bash(curl -v -X POST \"https://script.google.com/macros/s/AKfycbyw6Zv_RvsVW_TPpem6iQ85gV-aS_IrN3F1E8mUvH9nCP57xhybGlvlmyKUup0tB1Bk/exec\" -H \"Content-Type: application/json\" -d '{\"teste\":\"1\"}' --max-time 15)",
+      "Bash(rtk read *)",
+      "Read(//tmp/**)",
+      "Bash(curl -v -X POST \"https://script.google.com/macros/s/AKfycbyw6Zv_RvsVW_TPpem6iQ85gV-aS_IrN3F1E8mUvH9nCP57xhybGlvlmyKUup0tB1Bk/exec\" -H \"Content-Type: application/json\" --data-binary @/tmp/payload_real.json --max-time 40 -o /tmp/body.txt -D /tmp/headers2.txt)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
