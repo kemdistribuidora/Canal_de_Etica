@@ -1,0 +1,27 @@
+# Env / secrets
+.env
+.env.*
+*.env
+.clasp.json
+credentials.json
+*.pem
+*.key
+secrets/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+
+# Local settings (permissions, machine-specific)
+.claude/settings.local.json
+
+# Temp / logs
+*.log
+*.tmp
