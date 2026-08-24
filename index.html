@@ -94,60 +94,88 @@
 
     main {
       flex: 1;
-      width: min(1080px, 100%);
+      width: min(1240px, 100%);
       margin: 0 auto;
       padding: clamp(12px, 2vw, 20px) 16px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(340px, 460px);
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
       gap: clamp(16px, 3vw, 32px);
       align-items: start;
     }
 
-    .intro { padding: 4px 0 0; }
+    .intro {
+      padding: 18px 0 0;
+      position: sticky;
+      top: 76px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border: 1px solid #f7d4ba;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
 
     .intro h2 {
-      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      margin-top: 18px;
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      line-height: 1.08;
       font-weight: 800;
       color: var(--ink);
-      margin-bottom: 6px;
     }
 
     .intro > p {
+      margin-top: 16px;
       color: var(--muted);
-      font-size: .87rem;
-      line-height: 1.5;
-      max-width: 420px;
+      font-size: .96rem;
+      line-height: 1.65;
     }
 
     .fact-list {
       display: grid;
-      gap: 7px;
-      margin-top: 14px;
-      max-width: 420px;
+      gap: 14px;
+      margin-top: 28px;
     }
 
     .fact-item {
       display: flex;
       align-items: flex-start;
-      gap: 9px;
-      padding: 8px 10px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      color: var(--ink);
-      font-size: .8rem;
-      line-height: 1.4;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.55;
     }
 
-    .fact-item i { color: var(--brand); flex-shrink: 0; margin-top: 1px; }
-    .fact-item strong { font-weight: 800; }
+    .fact-item .mini-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--brand);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .fact-item strong { color: var(--ink); font-weight: 800; }
 
     .scope-line {
-      margin-top: 12px;
-      max-width: 420px;
-      font-size: .78rem;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: .87rem;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .scope-line strong { color: var(--ink); font-weight: 700; }
@@ -158,7 +186,7 @@
       border: 1px solid rgba(219, 228, 238, .95);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: clamp(14px, 2.5vw, 20px);
+      padding: clamp(18px, 2.5vw, 28px);
     }
 
     .section-title {
@@ -173,7 +201,30 @@
 
     .section-title i { color: var(--brand); }
 
-    .form-group { margin-bottom: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group:last-child { margin-bottom: 0; }
+
+    .field-block {
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .field-block:last-of-type { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+
+    .field-block-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      color: var(--brand-dark);
+      font-size: .74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .field-block-title i { color: var(--brand); flex-shrink: 0; }
 
     label {
       display: block;
@@ -220,7 +271,7 @@
 
     input::placeholder, textarea::placeholder { color: #94a3b8; }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
     .choice-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 
@@ -288,7 +339,7 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      margin-top: 2px;
+      margin-top: 18px;
       transition: transform .12s, box-shadow .2s, background .2s, opacity .2s;
     }
 
@@ -364,11 +415,17 @@
 
     @media (max-width: 900px) {
       main { grid-template-columns: 1fr; }
+      .card { order: -1; }
+      .intro { position: static; padding-top: 4px; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 560px) {
       header p { display: none; }
-      .grid-2, .choice-group { grid-template-columns: 1fr; }
+      .choice-group { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -386,16 +443,26 @@
 
 <main>
   <section class="intro" aria-label="Sobre o Canal de Ética">
-    <h2>Registre seu relato</h2>
+    <div class="eyebrow"><i data-lucide="shield-check" width="15" height="15"></i> Canal de Ética</div>
+    <h2>Registre seu relato.</h2>
     <p>
       Canal para colaboradores, terceiros e fornecedores relatarem descumprimentos do Código de
       Conduta ou da legislação vigente.
     </p>
 
     <div class="fact-list">
-      <div class="fact-item"><i data-lucide="user-round-x" width="16" height="16"></i> <span><strong>Identificação opcional.</strong> Preencher o nome não é obrigatório.</span></div>
-      <div class="fact-item"><i data-lucide="lock" width="16" height="16"></i> <span><strong>Acesso restrito.</strong> Somente o comitê de ética visualiza o conteúdo.</span></div>
-      <div class="fact-item"><i data-lucide="scale" width="16" height="16"></i> <span><strong>Retaliação é proibida</strong> contra quem relatar de boa-fé.</span></div>
+      <div class="fact-item">
+        <span class="mini-icon"><i data-lucide="user-round-x" width="18" height="18"></i></span>
+        <span><strong>Identificação opcional.</strong> Preencher o nome não é obrigatório.</span>
+      </div>
+      <div class="fact-item">
+        <span class="mini-icon"><i data-lucide="lock" width="18" height="18"></i></span>
+        <span><strong>Acesso restrito.</strong> Somente o comitê de ética visualiza o conteúdo.</span>
+      </div>
+      <div class="fact-item">
+        <span class="mini-icon"><i data-lucide="scale" width="18" height="18"></i></span>
+        <span><strong>Retaliação é proibida</strong> contra quem relatar de boa-fé.</span>
+      </div>
     </div>
 
     <p class="scope-line">
@@ -413,50 +480,61 @@
         <span x-text="erro"></span>
       </div>
 
-      <div class="form-group">
-        <label>Qual sua relação com a empresa? <span class="required">*</span></label>
-        <div class="choice-group" role="radiogroup" aria-label="Relação com a empresa">
-          <div class="choice-item" :class="{ ativo: form.relacao === 'Colaborador' }" @click="form.relacao = 'Colaborador'">Colaborador</div>
-          <div class="choice-item" :class="{ ativo: form.relacao === 'Fornecedor / Prestador de Serviços' }" @click="form.relacao = 'Fornecedor / Prestador de Serviços'">Fornecedor / Prestador</div>
-          <div class="choice-item" :class="{ ativo: form.relacao === 'Terceiros' }" @click="form.relacao = 'Terceiros'">Terceiros</div>
-        </div>
-      </div>
+      <div class="field-block">
+        <div class="field-block-title"><i data-lucide="user-round" width="15" height="15"></i> Quem está relatando</div>
 
-      <div class="form-group">
-        <label>Nome</label>
-        <input type="text" x-model="form.nome" placeholder="Nome completo (opcional)" maxlength="200">
-        <p class="note-anon"><i data-lucide="info" width="14" height="14"></i> Deixe em branco para relatar de forma anônima.</p>
-      </div>
-
-      <div class="grid-2">
         <div class="form-group">
-          <label>Data do ocorrido <span class="required">*</span></label>
-          <input type="date" x-model="form.dataOcorrido">
+          <label>Qual sua relação com a empresa? <span class="required">*</span></label>
+          <div class="choice-group" role="radiogroup" aria-label="Relação com a empresa">
+            <div class="choice-item" :class="{ ativo: form.relacao === 'Colaborador' }" @click="form.relacao = 'Colaborador'">Colaborador</div>
+            <div class="choice-item" :class="{ ativo: form.relacao === 'Fornecedor / Prestador de Serviços' }" @click="form.relacao = 'Fornecedor / Prestador de Serviços'">Fornecedor / Prestador</div>
+            <div class="choice-item" :class="{ ativo: form.relacao === 'Terceiros' }" @click="form.relacao = 'Terceiros'">Terceiros</div>
+          </div>
         </div>
+
         <div class="form-group">
-          <label>Local do ocorrido <span class="required">*</span></label>
-          <input type="text" x-model="form.ondeOcorrido" placeholder="Setor, unidade..." maxlength="200">
+          <label>Nome</label>
+          <input type="text" x-model="form.nome" placeholder="Nome completo (opcional)" maxlength="200">
+          <p class="note-anon"><i data-lucide="info" width="14" height="14"></i> Deixe em branco para relatar de forma anônima.</p>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Alguém presenciou? <span class="required">*</span></label>
-        <input type="text" x-model="form.presenciou" placeholder="Nomes das testemunhas, se houver" maxlength="200">
+      <div class="field-block">
+        <div class="field-block-title"><i data-lucide="calendar-search" width="15" height="15"></i> Sobre o ocorrido</div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Data do ocorrido <span class="required">*</span></label>
+            <input type="date" x-model="form.dataOcorrido">
+          </div>
+          <div class="form-group">
+            <label>Local do ocorrido <span class="required">*</span></label>
+            <input type="text" x-model="form.ondeOcorrido" placeholder="Setor, unidade..." maxlength="200">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Alguém presenciou? <span class="required">*</span></label>
+          <input type="text" x-model="form.presenciou" placeholder="Nomes das testemunhas, se houver" maxlength="200">
+        </div>
+
+        <div class="form-group">
+          <label>Descreva o ocorrido <span class="required">*</span></label>
+          <textarea x-model="form.descricao" placeholder="Descreva com o máximo de detalhes: o que aconteceu, quando e quem esteve envolvido." maxlength="5000"></textarea>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Descreva o ocorrido <span class="required">*</span></label>
-        <textarea x-model="form.descricao" placeholder="Descreva com o máximo de detalhes: o que aconteceu, quando e quem esteve envolvido." maxlength="5000"></textarea>
-      </div>
+      <div class="field-block">
+        <div class="field-block-title"><i data-lucide="paperclip" width="15" height="15"></i> Anexo (opcional)</div>
 
-      <div class="form-group">
-        <label>Anexo (opcional)</label>
-        <div class="upload-area" :class="{ 'tem-arquivo': arquivo }">
-          <input type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" @change="selecionarArquivo($event)">
-          <div>
-            <div class="upload-icon" x-html="arquivo ? '<i data-lucide=&quot;file-check-2&quot; width=&quot;26&quot; height=&quot;26&quot;></i>' : '<i data-lucide=&quot;paperclip&quot; width=&quot;26&quot; height=&quot;26&quot;></i>'"></div>
-            <div class="label-main" x-text="arquivo ? arquivo.name : 'Clique para anexar foto ou documento'"></div>
-            <div class="label-sub" x-text="arquivo ? formatarTamanho(arquivo.size) : 'Imagem, PDF, Word, Excel ou PowerPoint'"></div>
+        <div class="form-group">
+          <div class="upload-area" :class="{ 'tem-arquivo': arquivo }">
+            <input type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt" @change="selecionarArquivo($event)">
+            <div>
+              <div class="upload-icon" x-html="arquivo ? '<i data-lucide=&quot;file-check-2&quot; width=&quot;26&quot; height=&quot;26&quot;></i>' : '<i data-lucide=&quot;paperclip&quot; width=&quot;26&quot; height=&quot;26&quot;></i>'"></div>
+              <div class="label-main" x-text="arquivo ? arquivo.name : 'Clique para anexar foto ou documento'"></div>
+              <div class="label-sub" x-text="arquivo ? formatarTamanho(arquivo.size) : 'Imagem, PDF, Word, Excel ou PowerPoint'"></div>
+            </div>
           </div>
         </div>
       </div>
