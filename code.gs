@@ -1,5 +1,6 @@
 const CANAL_SHEET_NAME = 'Canal';
 const PLANILHA_ID = '1CquuKsOwCPWNTWFss-DjAaTMjZ9bqQKVvor_mMUIL2s';
+const PASTA_ANEXOS_ID = '1JzprrubUbWhhyPEciy8m7t06ehV7rHh4';
 
 function doGet() {
   return ContentService
@@ -46,7 +47,7 @@ function salvarOcorrencia(dados, nomeArquivo, base64Conteudo, mimeType) {
   if (base64Conteudo && base64Conteudo.length > 0) {
     const bytes = Utilities.base64Decode(base64Conteudo);
     const blob = Utilities.newBlob(bytes, mimeType || MimeType.BINARY, nomeArquivo || 'anexo');
-    const uploadedFile = DriveApp.createFile(blob);
+    const uploadedFile = DriveApp.getFolderById(PASTA_ANEXOS_ID).createFile(blob);
     anexoUrl = uploadedFile.getUrl();
   }
 
