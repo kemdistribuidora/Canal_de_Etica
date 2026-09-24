@@ -563,7 +563,7 @@
 <footer>Kem Distribuidora de Alimentos | Canal de Ética</footer>
 
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw6Zv_RvsVW_TPpem6iQ85gV-aS_IrN3F1E8mUvH9nCP57xhybGlvlmyKUup0tB1Bk/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzwPYbDrXnYFqlhvQqOF8GNGkblyj6ivWMySdtMWNH3DviWF8wjGvGGqyM-_G1DLSDO/exec';
 
 function renderIcons() {
   if (window.lucide) setTimeout(() => lucide.createIcons(), 0);
@@ -650,8 +650,8 @@ function canalEtica() {
 
         const response = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
+          // text/plain evita preflight OPTIONS, que o Apps Script não suporta
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
             relacao: f.relacao,
             nome: f.nome.trim(),

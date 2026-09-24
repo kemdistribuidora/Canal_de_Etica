@@ -76,7 +76,7 @@ function doPost(e) {
     if (e && e.postData && e.postData.contents) {
       const contentType = e.postData.type || '';
 
-      if (contentType.indexOf('application/json') !== -1) {
+      if (contentType.indexOf('application/json') !== -1 || contentType.indexOf('text/plain') !== -1) {
         payload = JSON.parse(e.postData.contents);
       } else if (contentType.indexOf('application/x-www-form-urlencoded') !== -1) {
         payload = e.parameter || {};
